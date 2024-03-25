@@ -14,6 +14,7 @@
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/_header.php"; ?>
     <a href="/addnews.php" class="btn btn-success">Додати новину</a>
     <h1 class="text-center">Актуальні новини</h1>
+<!--    --><?php //echo 'Версія PHP: ' . phpversion(); ?>
 
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/connection_database.php"; ?>
 
@@ -21,6 +22,7 @@
         <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Фото</th>
             <th scope="col">Назва</th>
             <th scope="col">Дата</th>
             <th scope="col">Опис</th>
@@ -36,11 +38,15 @@
         foreach ($rows as $row) {
             $id = $row["id"];
             $name = $row["name"];
+            $image = $row["image"];
             $datepublish = $row["datepublish"];
             $description = $row["description"];
             echo "
     <tr>
         <th scope='row'>$id</th>
+        <td>
+        <img src='/images/$image' alt='$name' width='100'>
+        </td>
         <td>$name</td>
         <td>$datepublish</td>
         <td>$description</td>
