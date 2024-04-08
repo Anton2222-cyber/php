@@ -1,17 +1,20 @@
 // App.tsx
 
-import React from 'react';
+
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import CategoryListPage from "./components/categories/list/CategoryListPage.tsx";
 
 
-
-const App: React.FC = () => {
+function App() {
     return (
-        <div className="container mx-auto px-4 py-8">
+        <BrowserRouter>
+            <Routes>
+                <Route  path="/" element={<CategoryListPage/>} />
 
-            <CategoryListPage />
-        </div>
+
+            </Routes>
+        </BrowserRouter>
     );
-};
+}
 
 export default App;
