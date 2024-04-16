@@ -36,6 +36,7 @@ export const categoryApi = createApi({
                 categoryFormData.append("name", category.name);
                 categoryFormData.append("description", category.description);
 
+                console.log("categoryID "+category.id);
                 return {
                     url: `categories/edit/${category.id}`,
                     method: "POST",

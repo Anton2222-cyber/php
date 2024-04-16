@@ -61,8 +61,9 @@ const CategoryEditModal = (props: EditCategoryModalProps) => {
     }, [categoryData, reset]);
 
     const onSubmit = handleSubmit(async (data) => {
+
         try {
-            await editCategory({ categoryId, ...data }).unwrap();
+            await editCategory({ id: categoryId, ...data,image: data.image[0] }).unwrap();
             showToast(`Category ${data.name} successfully edited!`, "success");
             close();
         } catch (err) {
