@@ -76,6 +76,7 @@ const CategoryItem: React.FC<ICategory & { onDelete: () => void; onEdit: () => v
                 <CategoryEditModal
                     open={editModalOpen}
                     close={() => setEditModalOpen(false)}
+                    // prevImage={imageUrl}
                     categoryId={id}
                     categoryData={{ name, description, image:undefined}}
                     // category={{id, name, image, description}} // Передаємо дані категорії для редагування
