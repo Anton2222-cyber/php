@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image')->nullable();
             $table->decimal('price', 8, 2); // Ціна до 999999.99
             $table->text('description')->nullable();
             $table->unsignedBigInteger('category_id');
