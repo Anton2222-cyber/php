@@ -44,11 +44,11 @@ const News = () => {
 
     return (
 
-            <div className='max-w-[1920px] h-[780px] w-full m-auto py-16 px-4 relative group'>
+            <div className='max-w-[1980px] h-[780px] w-full m-auto py-16 px-4 relative group'>
                 <h1 className="text-3xl font-bold text-center mb-8">News Page</h1>
                 <div
                     style={{backgroundImage: `url(${slides[currentIndex].url})`}}
-                    className='max-w-[1920px] h-[780px] w-full m-auto py-16 px-4 rounded-2xl bg-center bg-cover duration-500'
+                    className='max-w-[1980px] h-[780px] w-full m-auto py-16 px-4 rounded-2xl bg-center bg-cover duration-500'
                 >
                     <div className='absolute top-[60%] inset-0 flex items-center justify-center flex-col'>
                         <p className="text-white  text-center mb-4">
