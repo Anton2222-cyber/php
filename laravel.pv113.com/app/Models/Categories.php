@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @method static create(array $inputs)
  * @method static find(int $id)
+ * @method static inRandomOrder()
  */
 class Categories extends Model
 {
