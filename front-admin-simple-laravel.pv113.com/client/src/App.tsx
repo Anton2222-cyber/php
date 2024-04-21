@@ -3,6 +3,7 @@ import CategoryListPage from "./components/categories/list/CategoryListPage.tsx"
 import {Route, Routes} from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 import AdminLayout from "./components/containers/admin/AdminLayout.tsx";
+import News from "./components/news/News.tsx";
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
                 </Route>
 
                 <Route path="*" element={<NotFoundPage/>}/>
+                <Route path="/news" element={<News/>}/>
             </Routes>
         </>
     )
