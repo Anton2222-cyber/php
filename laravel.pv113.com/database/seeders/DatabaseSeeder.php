@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        if(User::count()==0) {
-            User::factory(10)->create();
-        }
+//        if(User::count()==0) {
+//            User::factory(10)->create();
+//        }
         if(Categories::count()==0) {
             Categories::factory(20)->create();
         }
@@ -33,10 +33,15 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 //        Categories::factory()->create();
 //
-//        User::factory(1)->create([
-//            'name' => 'Test User',
-//            'email' => 'test@example.com',
-//            'password' => Hash::make('123456'),
-//        ]);
+
+
+        if(User::count()==0) {
+            User::factory(1)->create([
+                'name' => 'Марко Іван',
+                'email' => 'marko@gmail.com',
+                'password' => Hash::make('123456'),
+                'email_verified_at' => now(),
+            ]);
+        }
     }
 }

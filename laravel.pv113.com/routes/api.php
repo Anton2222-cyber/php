@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\SenderController;
 use Illuminate\Http\Request;
@@ -15,3 +16,5 @@ Route::get('/categories/{id}', [CategoriesController::class, 'getById']);
 Route::post('/categories/edit/{id}', [CategoriesController::class, 'edit']);
 Route::delete('/categories/{id}', [CategoriesController::class, 'delete']);
 Route::post('/send/email', [SenderController::class, 'send_email']);
+
+Route::post('/login', [AuthController::class, 'login']);
