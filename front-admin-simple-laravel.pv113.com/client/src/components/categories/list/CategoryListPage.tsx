@@ -78,8 +78,7 @@ const CategoryListPage = () => {
                 <CategoryGrid
                     categories={categories?.data}
                     totalPages={categories?.last_page}
-                    edit={()=>{}}
-                    remove={()=>{}}
+                    handleDelete={handleDeleteCategory}
                     isLoading={isLoading}
                 />
 
