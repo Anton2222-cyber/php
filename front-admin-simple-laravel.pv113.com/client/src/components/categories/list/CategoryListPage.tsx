@@ -1,6 +1,6 @@
 // CategoryListPage.tsx
 
-import CategoryItem from "./CategoryItem.tsx";
+
 import {useGetCategoriesQuery, useDeleteCategoryMutation} from "../../../services/category.ts"; // Імпорт мутації для видалення категорії
 import Skeleton from "../../helpers/Skeleton.tsx";
 import {Button} from "../../ui/Button.tsx";
@@ -11,6 +11,7 @@ import {useSearchParams} from "react-router-dom";
 import {useDebouncedCallback} from "use-debounce";
 import {Input} from "../../ui/Input.tsx";
 import CategoryGrid from "./CategoryGrid.tsx";
+import showToast from "../../../utils/showToast.ts";
 
 
 const CategoryListPage = () => {
@@ -39,6 +40,7 @@ const CategoryListPage = () => {
         try {
             // Виклик мутації для видалення категорії з заданим ідентифікатором
             await deleteCategoryMutation(categoryId);
+            showToast(`Category ${categoryId} successful deleted!`, "success");
             // Після успішного видалення перезавантажте дані
             await refetch();
         } catch (error) {

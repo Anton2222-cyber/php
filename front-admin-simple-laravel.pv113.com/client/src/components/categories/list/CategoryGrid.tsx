@@ -25,7 +25,8 @@ const CategoryGrid = ({categories, isLoading, handleDelete, totalPages}: Categor
                         description={category.description}
                         image={category.image}
                         name={category.name}
-                        onDelete={() => handleDelete(category.id)}/>
+                        onDelete={() => handleDelete(category.id)}
+                    />
 
                 ))}
             </div>

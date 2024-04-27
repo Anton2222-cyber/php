@@ -18,3 +18,4 @@ Route::delete('/categories/{id}', [CategoriesController::class, 'delete']);
 Route::post('/send/email', [SenderController::class, 'send_email']);
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);

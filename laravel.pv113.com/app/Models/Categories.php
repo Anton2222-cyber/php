@@ -19,6 +19,7 @@ class Categories extends Model
         'name',
         'image',
         'description',
+        'is_delete'
     ];
     public function products()
     {

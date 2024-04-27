@@ -5,7 +5,7 @@ import DeleteConfirmationModal from "../../ui/DeleteConfirmationModal.tsx";
 import CategoryEditModal from "../edit/CategoryEditModal.tsx";
 import {ICategory} from "../../../interfaces/category";
 
-const CategoryItem: React.FC<ICategory & { onDelete: () => void; onEdit: () => void }> = ({
+const CategoryItem: React.FC<ICategory & { onDelete: () => void;  }> = ({
                                                                                               id,
                                                                                               name,
                                                                                               image,
