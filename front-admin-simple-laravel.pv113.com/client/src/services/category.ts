@@ -27,6 +27,8 @@ export const categoryApi = createApi({
             //Привязуємося до тега, якщо нічого не змінилося(залишаємо стера, якщо є зміни то оновляємо)
             invalidatesTags: ["Category"],
         }),
+
+
         editCategory: builder.mutation({
             query: (category: IEditCategory) => {
                 const categoryFormData = new FormData();
@@ -45,8 +47,6 @@ export const categoryApi = createApi({
             },
             invalidatesTags: ["Category"],
         }),
-
-
         deleteCategory: builder.mutation({
             query: (categoryId: number) => ({
                 url: `/categories/${categoryId}`,

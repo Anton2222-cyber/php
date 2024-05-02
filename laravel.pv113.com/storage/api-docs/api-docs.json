@@ -70,10 +70,9 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Register",
-                "operationId": "register",
+                "operationId": "8e4e3cb7b46126f4696379d3c7eeb4ad",
                 "requestBody": {
-                    "description": "User registration data",
+                    "description": "User register data",
                     "required": true,
                     "content": {
                         "multipart/form-data": {
@@ -82,8 +81,8 @@
                                     "name",
                                     "email",
                                     "password",
-                                    "phone",
-                                    "photo"
+                                    "image",
+                                    "phone"
                                 ],
                                 "properties": {
                                     "name": {
@@ -95,11 +94,11 @@
                                     "password": {
                                         "type": "string"
                                     },
+                                    "image": {
+                                        "type": "file"
+                                    },
                                     "phone": {
                                         "type": "string"
-                                    },
-                                    "photo": {
-                                        "type": "file"
                                     }
                                 },
                                 "type": "object"
@@ -114,8 +113,8 @@
                             "application/json": {}
                         }
                     },
-                    "422": {
-                        "description": "Unprocessable Entity"
+                    "401": {
+                        "description": "Unauthenticated"
                     }
                 }
             }

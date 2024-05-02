@@ -35,13 +35,13 @@ class DatabaseSeeder extends Seeder
 //
 
 
-        if(User::count()==0) {
-            User::factory(1)->create([
-                'name' => 'Марко Іван',
-                'email' => 'marko@gmail.com',
-                'password' => Hash::make('123456'),
-                'email_verified_at' => now(),
-            ]);
-        }
+//        if(User::count()==0) {
+//            User::factory(1)->create([
+//                'name' => 'Марко Іван',
+//                'email' => 'marko@gmail.com',
+//                'password' => Hash::make('123456'),
+//                'email_verified_at' => now(),
+//            ]);
+//        }
     }
 }

@@ -80,20 +80,18 @@ class AuthController extends Controller
      * @OA\Post(
      *   path="/api/register",
      *   tags={"Auth"},
-     *   summary="Register",
-     *   operationId="register",
      *   @OA\RequestBody(
      *     required=true,
-     *     description="User registration data",
+     *     description="User register data",
      *     @OA\MediaType(
      *       mediaType="multipart/form-data",
      *       @OA\Schema(
-     *         required={"name", "email", "password", "phone", "photo"},
+     *         required={"name","email", "password", "image", "phone"},
      *         @OA\Property(property="name", type="string"),
      *         @OA\Property(property="email", type="string"),
      *         @OA\Property(property="password", type="string"),
+     *         @OA\Property(property="image", type="file"),
      *         @OA\Property(property="phone", type="string"),
-     *         @OA\Property(property="photo", type="file"),
      *       )
      *     )
      *   ),
@@ -105,56 +103,47 @@ class AuthController extends Controller
      *     )
      *   ),
      *   @OA\Response(
-     *     response=422,
-     *     description="Unprocessable Entity"
+     *     response=401,
+     *     description="Unauthenticated"
      *   )
      * )
      */
     public function register(Request $request)
     {
-        $validation = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'phone' => 'nullable|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:104857600', // максимальний розмір 100 МБ
+            'phone' => 'nullable|string|max:255',
+            'image' => 'file',
         ]);
 
-        if ($validation->fails()) {
-            return response()->json($validation->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        if ($request->hasFile('image')) {
+            $takeImage = $request->file('image');
+            $manager = new ImageManager(new Driver());
+
+            $filename = time();
+
+            $sizes = [100, 300, 500];
+
+            foreach ($sizes as $size) {
+                $image = $manager->read($takeImage);
+                $image->scale(width: $size, height: $size);
+                $image->toWebp()->save(base_path('public/upload/' . $size . '_' . $filename . '.webp'));
+            }
         }
 
-        $folderName = public_path('upload');
-        if (!file_exists($folderName)) {
-            mkdir($folderName, 0777); // Створити папку з правами доступу 0777
-        }
-
-        $image = $request->file("photo");
-        $imageName = uniqid().".webp";
-        $sizes = [50, 150, 300, 600, 1200];
-        $manager = new ImageManager(new Driver());
-        foreach($sizes as $size) {
-            $fileSave = $size ."_".$imageName;
-            $imageRead = $manager->read($image);
-            $imageRead->scale(width: $size);
-            $path = public_path('upload/'.$fileSave);
-            $imageRead->toWebp()->save($path);
-        }
-
-        $inputs = $request->only('name', 'email', 'password', 'phone');
-        $inputs["photo"] = $imageName;
         $user = User::create([
-            'name' => $inputs['name'],
-            'email' => $inputs['email'],
-            'password' => Hash::make($inputs['password']),
-            'phone' => $inputs['phone'],
-            'photo' => $inputs['photo'],
-            'email_verified_at' => now(),
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'image' => $filename . '.webp',
         ]);
 
-        $token = $this->createToken($user);
+        $token = auth()->login($user);
 
-        return response()->json(['token' => $token], Response::HTTP_OK);
+        return response()->json(['token' => $token], Response::HTTP_CREATED);
     }
     private function createToken($user)
     {

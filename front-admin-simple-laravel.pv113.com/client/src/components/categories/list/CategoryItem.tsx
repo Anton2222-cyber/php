@@ -4,15 +4,16 @@ import {IconTrash, IconEdit} from "@tabler/icons-react";
 import DeleteConfirmationModal from "../../ui/DeleteConfirmationModal.tsx";
 import CategoryEditModal from "../edit/CategoryEditModal.tsx";
 import {ICategory} from "../../../interfaces/category";
-
+export const API_URL = import.meta.env.VITE_API_URL;
 const CategoryItem: React.FC<ICategory & { onDelete: () => void;  }> = ({
                                                                                               id,
                                                                                               name,
                                                                                               image,
                                                                                               description,
                                                                                               onDelete
-                                                                                          }) => {
-    const imageUrl = `http://laravel.pv113.com/upload/300_${image}`;
+                                                                                                                                                        }) => {
+    // const imageUrl = `http://laravel.pv113.com/upload/300_${image}`;
+    const imageUrl = `${API_URL}/upload/300_${image}`;
     const [deleting, setDeleting] = useState<boolean>(false);
     const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
     const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
