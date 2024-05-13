@@ -11,11 +11,13 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/categories', [CategoriesController::class, 'getList']);
-Route::post('/categories/create', [CategoriesController::class, 'create']);
+Route::post('/categories/create', [CategoriesController::class, 'create'])->middleware('auth:api');
 Route::get('/categories/{id}', [CategoriesController::class, 'getById']);
-Route::post('/categories/edit/{id}', [CategoriesController::class, 'edit']);
+Route::post('/categories/edit/{id}', [CategoriesController::class, 'edit'])->middleware('auth:api');
 Route::delete('/categories/{id}', [CategoriesController::class, 'delete']);
 Route::post('/send/email', [SenderController::class, 'send_email']);
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login/google', [AuthController::class, 'loginGoogle']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/verification', [AuthController::class, 'verificationEmail']);

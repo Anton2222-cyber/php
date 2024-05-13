@@ -1,10 +1,22 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_URL } from "../utils/apiUrl.ts";
-import {ICategory, ICategoryResponse, ICreateCategory, IEditCategory} from "../interfaces/category";
+import {ICategoryResponse, ICreateCategory, IEditCategory} from "../interfaces/category";
 
 export const categoryApi = createApi({
     reducerPath: "categoryApi",
-    baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}/api` }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: `${API_URL}/api`,
+        prepareHeaders: (headers) => {
+            // Отримати токен з localStorage
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                // Додати заголовок Authorization з токеном
+                headers.set('Authorization', `Bearer ${token}`);
+            }
+            return headers;
+        },
+
+    }),
     tagTypes: ["Category"],
     endpoints: (builder) => ({
         getCategories: builder.query<ICategoryResponse, { page: number; search: string }>({

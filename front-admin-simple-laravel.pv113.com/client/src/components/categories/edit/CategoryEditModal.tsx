@@ -26,6 +26,7 @@ type EditCategoryModalProps = {
     };
 };
 
+
 type EditCategorySchemaType = z.infer<typeof EditCategorySchema>;
 
 const EditCategorySchema = z.object({
@@ -38,14 +39,14 @@ const EditCategorySchema = z.object({
 });
 
 const CategoryEditModal = (props: EditCategoryModalProps) => {
-    const {open, close, categoryId, categoryData} = props;
+    const {close, categoryId, categoryData} = props;
     const [editCategory, {isLoading}] = useEditCategoryMutation(); // Використовуємо функцію для редагування категорії
 
     const {
         register,
         handleSubmit,
         reset,
-        setValue, // Функція для встановлення значення поля форми
+// Функція для встановлення значення поля форми
         formState: {errors},
     } = useForm<EditCategorySchemaType>({
         resolver: zodResolver(EditCategorySchema),
@@ -62,8 +63,9 @@ const CategoryEditModal = (props: EditCategoryModalProps) => {
             await editCategory({id: categoryId, ...data, image: data.image[0]}).unwrap();
             showToast(`Category ${data.name} successfully edited!`, "success");
             close();
-        } catch (err) {
+        } catch (err:  any) {
             console.log(err);
+
             showToast(`Error editing ${data.name} category! ${err.error}`, "error");
         }
     });

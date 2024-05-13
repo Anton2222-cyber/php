@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {BsChevronCompactLeft, BsChevronCompactRight} from 'react-icons/bs';
 import {RxDotFilled} from 'react-icons/rx';
 import {Button} from "../ui/Button.tsx";
@@ -38,7 +38,7 @@ const News = () => {
         setCurrentIndex(newIndex);
     };
 
-    const goToSlide = (slideIndex) => {
+    const goToSlide = (slideIndex: number) => {
         setCurrentIndex(slideIndex);
     };
 
@@ -71,7 +71,7 @@ const News = () => {
                 </div>
 
                 <div className='flex top-4 justify-center py-2'>
-                    {slides.map((slide, slideIndex) => (
+                    {slides.map((_, slideIndex) => (
                         <div
                             key={slideIndex}
                             onClick={() => goToSlide(slideIndex)}
